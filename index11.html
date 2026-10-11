@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff4f7">
+<title>PennyBloom — Budget & Expense Diary</title>
+<style>
+:root{--ink:#40364b;--muted:#81778b;--pink:#ff8eae;--pink2:#ffe0e9;--lilac:#e9e1ff;--mint:#d9f6e8;--yellow:#fff0bd;--blue:#dceeff;--paper:#fffdfd;--line:#f0e7ee;--shadow:0 12px 35px #6f4d6610}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff5f7,#f8f5ff 55%,#f0fff8);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{max-width:1200px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center}.logo{width:53px;height:53px;border-radius:18px;background:var(--pink2);display:grid;place-items:center;font-size:29px;box-shadow:var(--shadow)}h1{font-size:clamp(1.35rem,3vw,2rem);margin:0;letter-spacing:-.7px}.sub{color:var(--muted);font-size:.9rem;margin-top:4px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:11px 15px;border-radius:14px;background:white;color:var(--ink);font-weight:700;box-shadow:var(--shadow);border:1px solid var(--line)}.btn.primary{background:var(--ink);color:white}.btn.pink{background:var(--pink2)}.hero{background:linear-gradient(110deg,#ffe1ea,#eee5ff 65%,#dcf8e9);border-radius:27px;padding:25px;display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;box-shadow:var(--shadow);margin-bottom:18px}.hero h2{font-size:clamp(1.5rem,3vw,2.35rem);margin:7px 0}.hero p{color:#6f627b;max-width:540px;line-height:1.55;margin:8px 0 15px}.eyebrow{text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:1.5px;color:#8b6a91}.mascot{font-size:88px;text-align:center;filter:drop-shadow(0 8px 3px #b68b9a22)}.month-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0}.month-row label{font-weight:800}.month-row input{width:auto}.field, input,select,textarea{border:1px solid #eadfe9;background:#fff;border-radius:12px;padding:11px 12px;color:var(--ink);width:100%;outline:none}input:focus,select:focus,textarea:focus{border-color:#d19ad0;box-shadow:0 0 0 3px #f5e4f5}.month-row input{width:auto}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:18px}.stat{padding:18px;border-radius:21px;background:#fff;box-shadow:var(--shadow);border:1px solid #f6edf3;min-width:0}.stat .icon{font-size:24px}.stat .label{font-size:.83rem;color:var(--muted);margin-top:10px}.stat .value{font-size:clamp(1.25rem,2.4vw,1.8rem);font-weight:900;margin-top:5px;overflow-wrap:anywhere}.stat .hint{font-size:.78rem;color:var(--muted);margin-top:6px}.budget-card{background:white;border:1px solid var(--line);border-radius:23px;padding:20px;box-shadow:var(--shadow);margin-bottom:18px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.section-head h3{margin:0;font-size:1.12rem}.budget-settings{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}.field-wrap label{font-size:.8rem;font-weight:800;display:block;margin:0 0 6px 2px}.progress{height:15px;background:#f4edf4;border-radius:99px;overflow:hidden;margin:15px 0 8px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#ff9db8,#bba8ff,#87ddba);border-radius:99px;transition:width .3s}.progress-caption{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.82rem;flex-wrap:wrap}.content{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:23px;padding:20px;box-shadow:var(--shadow);min-width:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.full{grid-column:1/-1}.form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.note{color:var(--muted);font-size:.78rem;line-height:1.5;margin-top:10px}.transactions{margin-top:16px}.tx{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #f4edf3}.tx:last-child{border-bottom:0}.tx-icon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;font-size:21px;background:#fff0f5;flex-shrink:0}.tx-main{flex:1;min-width:0}.tx-title{font-weight:800;overflow-wrap:anywhere}.tx-meta{font-size:.77rem;color:var(--muted);margin-top:3px}.tx-amount{font-weight:900;white-space:nowrap}.tx-amount.expense{color:#cf5579}.tx-amount.income{color:#218b67}.tiny-actions{display:flex;gap:5px;margin-left:5px}.tiny{background:#f8f3fa;border-radius:9px;padding:6px 8px;color:var(--muted)}.empty{text-align:center;padding:28px 12px;color:var(--muted)}.empty span{font-size:36px;display:block;margin-bottom:7px}.category-list{display:grid;gap:13px}.cat-row{display:grid;grid-template-columns:35px minmax(70px,1fr) auto;align-items:center;gap:8px}.cat-icon{font-size:21px}.cat-name{font-weight:800;font-size:.88rem}.cat-track{height:8px;background:#f4edf4;border-radius:99px;margin-top:7px;overflow:hidden}.cat-track div{height:100%;border-radius:99px;background:linear-gradient(90deg,#ff9fba,#b5a5ff)}.cat-amount{font-weight:900;font-size:.9rem;white-space:nowrap}.insights{display:grid;gap:10px}.tip{background:#fff8dd;border-radius:16px;padding:13px;line-height:1.45;font-size:.88rem}.tip:nth-child(2){background:#e8f8ef}.tip:nth-child(3){background:#f0eaff}.tip strong{display:block;margin-bottom:4px}.two-panels{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.month-compare{display:grid;gap:9px}.compare-row{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;background:#fbf8fc;border-radius:12px;font-size:.88rem}.footer{text-align:center;color:var(--muted);font-size:.8rem;padding:24px 8px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#40364b;color:white;padding:12px 18px;border-radius:14px;box-shadow:var(--shadow);display:none;z-index:10;max-width:90vw}.toast.show{display:block}.danger{color:#b43b5e}.muted{color:var(--muted)}.divider{height:1px;background:var(--line);margin:16px 0}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.content{grid-template-columns:1fr}.hero{grid-template-columns:1fr .35fr}.mascot{font-size:65px}.two-panels{grid-template-columns:1fr}.budget-settings{grid-template-columns:1fr 1fr}.budget-settings .btn{grid-column:1/-1}}
+@media(max-width:520px){.app{padding:13px}.top{align-items:flex-start}.top-actions{justify-content:flex-end}.top-actions .btn{padding:9px 10px;font-size:.8rem}.hero{padding:19px;border-radius:22px;grid-template-columns:1fr .25fr}.mascot{font-size:47px}.grid{gap:9px}.stat{padding:14px;border-radius:17px}.panel,.budget-card{padding:15px;border-radius:19px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.budget-settings{grid-template-columns:1fr 1fr}.tx{gap:8px}.tx-icon{width:36px;height:36px}.tiny-actions{flex-direction:column}.month-row{gap:7px}.month-row input{max-width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="logo">🐷</div><div><h1>PennyBloom</h1><div class="sub">Your college money diary · small spends, smart saves 🌷</div></div></div>
+ <div class="top-actions"><button class="btn" id="exportBtn">⬇ Export CSV</button><button class="btn pink" id="backupBtn">♡ Backup</button></div>
+</header>
+<section class="hero">
+ <div><div class="eyebrow">A little care for your college budget</div><h2>College life.<br>Money sorted. ✨</h2><p>Track canteen snacks, travel, printouts, hangouts and hostel essentials — without losing track of your monthly money.</p><button class="btn primary" onclick="document.getElementById('amount').focus()">＋ Add an expense</button></div>
+ <div class="mascot" aria-label="cute piggy bank">🐷💗</div>
+</section>
+<div class="month-row"><label for="monthPicker">📅 Your month</label><input type="month" id="monthPicker"><span class="sub">Switch months to review your diary.</span></div>
+<section class="grid">
+ <div class="stat"><div class="icon">💸</div><div class="label">Total spent</div><div class="value" id="totalSpent">₹0</div><div class="hint" id="expenseCount">0 expenses this month</div></div>
+ <div class="stat"><div class="icon">🌼</div><div class="label">Budget left</div><div class="value" id="budgetLeft">₹0</div><div class="hint" id="budgetLeftHint">Set your monthly spending limit below</div></div>
+ <div class="stat"><div class="icon">🎒</div><div class="label">Money available</div><div class="value" id="totalIncome">₹0</div><div class="hint">Pocket money / allowance plan</div></div>
+ <div class="stat"><div class="icon">🐷</div><div class="label">Money left</div><div class="value" id="savings">₹0</div><div class="hint" id="savingsHint">Available money minus spending</div></div>
+</section>
+<section class="budget-card">
+ <div class="section-head"><h3>🎯 My student budget plan</h3><span class="sub" id="budgetStatus">A fresh start!</span></div>
+ <div class="budget-settings">
+  <div class="field-wrap"><label for="budgetInput">Monthly spending limit (₹)</label><input type="number" id="budgetInput" min="0" step="1" placeholder="e.g. 5000"></div>
+  <div class="field-wrap"><label for="incomePlan">Pocket money / money available (₹)</label><input type="number" id="incomePlan" min="0" step="1" placeholder="e.g. 5000"></div>
+  <div class="field-wrap"><label for="savingsGoal">Savings goal (₹)</label><input type="number" id="savingsGoal" min="0" step="1" placeholder="e.g. 1000"></div>
+  <button class="btn primary" id="savePlan">Save plan ✨</button>
+ </div>
+ <div class="progress"><div id="budgetBar"></div></div>
+ <div class="progress-caption"><span id="budgetProgressText">₹0 spent of ₹0</span><span id="budgetPercent">0%</span></div>
+</section>
+<div class="content">
+ <section class="panel">
+  <div class="section-head"><h3 id="formTitle">🧁 Add an expense</h3><span class="sub">Every rupee has a story</span></div>
+  <form id="entryForm">
+   <div class="form-grid">
+    
+    <div class="field-wrap"><label for="amount">Amount spent (₹) *</label><input id="amount" type="number" min="0.01" step="0.01" required placeholder="e.g. 120"></div>
+    <div class="field-wrap"><label for="category">Category</label><select id="category"></select></div>
+    <div class="field-wrap"><label for="entryDate">Date *</label><input id="entryDate" type="date" required></div>
+    <div class="field-wrap"><label for="payment">Payment method</label><select id="payment"><option>UPI</option><option>Cash</option><option>Debit/Credit card</option><option>Bank transfer</option><option>Other</option></select></div>
+    <div class="field-wrap"><label for="description">Description</label><input id="description" maxlength="100" placeholder="e.g. canteen lunch / photocopy"></div>
+   </div>
+   <div class="form-actions"><button class="btn primary" type="submit" id="submitEntry">Add expense 💗</button><button class="btn" type="button" id="cancelEdit" hidden>Cancel edit</button></div>
+   <div class="note">🔒 Made for student life: log canteen food, bus/auto, college supplies, recharge, outings and hostel costs. Entries stay in this browser; export a backup regularly.</div>
+  </form>
+  <div class="divider"></div>
+  <div class="section-head"><h3>🧾 This month's diary</h3><select id="typeFilter" style="width:auto;max-width:145px;padding:8px"><option value="all">All expenses</option><option value="expense">Expenses</option></select></div>
+  <div id="transactionList" class="transactions"></div>
+ </section>
+ <section class="panel">
+  <div class="section-head"><h3>🍓 Where did it go?</h3><span class="sub">By category</span></div>
+  <div id="categoryList" class="category-list"></div>
+  <div class="divider"></div>
+  <div class="section-head"><h3>💡 Penny's little insights</h3></div>
+  <div class="insights" id="insights"></div>
+  <div class="note">Suggestions are based on the entries you record. A category being large doesn't automatically mean the spending was unnecessary.</div>
+ </section>
+</div>
+<section class="panel" id="comparisonPanel" style="margin-top:18px">
+ <div class="section-head"><h3>📊 This month vs last month</h3><span class="sub" id="comparisonLabel">Month-to-month view</span></div>
+ <div class="grid" style="margin-bottom:12px">
+  <div class="stat"><div class="icon">🧾</div><div class="label">Last month spent</div><div class="value" id="prevSpent">₹0</div><div class="hint" id="prevMonthLabel">Previous month</div></div>
+  <div class="stat"><div class="icon">💸</div><div class="label">Selected month spent</div><div class="value" id="currentComparedSpent">₹0</div><div class="hint" id="currentMonthLabel">Selected month</div></div>
+  <div class="stat"><div class="icon">🌱</div><div class="label">Spending change</div><div class="value" id="spendingChange">₹0</div><div class="hint" id="spendingChangeHint">Compared with last month</div></div>
+  <div class="stat"><div class="icon">🐷</div><div class="label">Better savings month</div><div class="value" id="savingsWinner">Need data</div><div class="hint" id="savingsCompareHint">Based on available money minus spending</div></div>
+ </div>
+ <div class="two-panels" style="margin-top:0"><div><h4 style="margin:4px 0 10px">🛍️ Category changes</h4><div id="categoryComparison" class="month-compare"></div></div><div><h4 style="margin:4px 0 10px">💡 What changed?</h4><div id="comparisonInsights" class="insights"></div></div></div>
+ <div class="divider"></div>
+ <div class="section-head"><h3>🔮 Month-end spending forecast</h3><span class="sub" id="forecastLabel">Based on recorded spending</span></div>
+ <div class="grid" style="margin-bottom:8px">
+  <div class="stat"><div class="icon">📅</div><div class="label">Days counted</div><div class="value" id="forecastDays">—</div><div class="hint" id="forecastDaysHint">Selected month</div></div>
+  <div class="stat"><div class="icon">🔮</div><div class="label">Estimated month total</div><div class="value" id="forecastTotal">₹0</div><div class="hint" id="forecastMethod">Needs spending data</div></div>
+  <div class="stat"><div class="icon">🎯</div><div class="label">Forecast vs budget</div><div class="value" id="forecastBudgetDiff">—</div><div class="hint" id="forecastBudgetHint">Add a budget plan</div></div>
+  <div class="stat"><div class="icon">🌿</div><div class="label">Daily average</div><div class="value" id="forecastDailyAvg">₹0</div><div class="hint">Recorded spending per elapsed day</div></div>
+ </div>
+ <div class="progress"><div id="forecastBar"></div></div>
+ <div class="progress-caption"><span id="forecastProgressText">Forecast will appear here</span><span id="forecastPercent">—</span></div>
+ <div class="note" id="forecastNote">Forecasts are estimates from recorded entries, not guarantees. Missing expenses can make the projection too low.</div>
+ <div class="note">Savings comparison uses pocket money / available money when entered. If that is missing, the budget limit can be shown as a separate proxy, but it is not the same as actual money available. For the fairest comparison, enter pocket money for both months. A higher expense category isn't automatically unnecessary.</div>
+</section>
+<div class="two-panels">
+ <section class="panel"><div class="section-head"><h3>📆 Month-end summary</h3><span class="sub" id="summaryMonth"></span></div><div class="month-compare" id="monthSummary"></div><button class="btn" id="summaryExport" style="margin-top:12px">Export this month's report</button></section>
+ <section class="panel"><div class="section-head"><h3>🌷 Next month's saving ideas</h3></div><div id="nextTips" class="insights"></div><div class="note">Try choosing one small change you can comfortably maintain. Essential expenses and wellbeing come first.</div></section>
+</div>
+<div class="footer">Made with 💗 for calmer money days · PennyBloom works offline after opening · ₹ Indian Rupees</div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const categories = {
+ expense:[
+  ['Canteen & snacks','🍜'],['Travel / bus / auto','🚌'],['College supplies & printouts','📚'],['Hostel / room','🛏️'],['Mobile recharge & data','📱'],['Hangouts & entertainment','🎬'],['Shopping','🛍️'],['Personal care','🧴'],['Health & medicines','🩹'],['Subscriptions','🎧'],['Fees & academics','🎓'],['Other','✨']
+ ],
+ income:[]
+};
+const storeKey='pennybloom_v1';
+let db={entries:[],plans:{}}, editingId=null;
+const now=new Date(), monthString=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+const activeMonth=()=> $('monthPicker').value || monthString(new Date());
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(Number(n)||0);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateToday=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+function load(){try{const x=JSON.parse(localStorage.getItem(storeKey)||'{}');db={entries:Array.isArray(x.entries)?x.entries:[],plans:x.plans||{}}}catch(e){db={entries:[],plans:{}}}}
+function persist(){localStorage.setItem(storeKey,JSON.stringify(db))}
+function plan(){return db.plans[activeMonth()]||{budget:0,income:0,goal:0}}
+function monthEntries(){return db.entries.filter(e=>e.date&&e.date.startsWith(activeMonth()))}
+function sums(entries){return entries.reduce((a,e)=>{a[e.type]=(a[e.type]||0)+Number(e.amount||0);return a},{expense:0,income:0})}
+function setCategories(selected){const list=categories.expense;$('category').innerHTML=list.map(([n,ic])=>`<option value="${esc(n)}">${ic} ${esc(n)}</option>`).join('');if(selected&&list.some(x=>x[0]===selected))$('category').value=selected}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2500)}
+function render(){
+ const entries=monthEntries(), p=plan(), total=sums(entries), spent=total.expense, available=Number(p.income||0), left=Number(p.budget||0)-spent, savings=(available>0?available:Number(p.budget||0))-spent;
+ $('totalSpent').textContent=money(spent);$('expenseCount').textContent=`${entries.filter(e=>e.type==='expense').length} expenses this month`;
+ $('budgetLeft').textContent=money(left);$('budgetLeft').classList.toggle('danger',left<0);
+ $('budgetLeftHint').textContent=Number(p.budget)>0?(left<0?`Over budget by ${money(-left)}`:`${money(Math.max(0,left))} available`):'Set your monthly spending limit below';
+ $('totalIncome').textContent=money(available);$('savings').textContent=money(savings);$('savingsHint').textContent=savings>=0?'Available money minus expenses':'Expenses are above your planned money';
+ const pct=Number(p.budget)>0?Math.min(100,spent/Number(p.budget)*100):0;$('budgetBar').style.width=pct+'%';$('budgetProgressText').textContent=`${money(spent)} spent of ${money(p.budget)}`;$('budgetPercent').textContent=Number(p.budget)>0?`${Math.round(spent/Number(p.budget)*100)}% used`:'No budget set';
+ $('budgetStatus').textContent=Number(p.budget)===0?'A fresh start!':spent>p.budget?'Budget crossed — review gently 💗':pct>=80?'Almost at your limit 🌻':'You’re building good habits 🌱';
+ $('budgetInput').value=p.budget||'';$('incomePlan').value=p.income||'';$('savingsGoal').value=p.goal||'';
+ renderTransactions(entries);renderCategories(entries);renderInsights(entries,p,total);renderComparison();renderSummary(entries,p,total);renderNextTips(entries,p,total);
+}
+function renderTransactions(entries){
+ const filter=$('typeFilter').value;const arr=entries.filter(e=>filter==='all'||e.type===filter).sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt);
+ if(!arr.length){$('transactionList').innerHTML='<div class="empty"><span>🧺</span>No entries yet for this view.<br>Add your first one above!</div>';return}
+ $('transactionList').innerHTML=arr.map(e=>{const cat=(categories[e.type]||[]).find(c=>c[0]===e.category);return `<div class="tx"><div class="tx-icon">${cat?cat[1]:'✨'}</div><div class="tx-main"><div class="tx-title">${esc(e.description||e.category)}</div><div class="tx-meta">${esc(e.category)} · ${esc(e.date)} · ${esc(e.payment||'')}</div></div><div class="tx-amount ${e.type}">${e.type==='income'?'+':'−'}${money(e.amount)}</div><div class="tiny-actions"><button class="tiny" title="Edit" onclick="editEntry('${e.id}')">✎</button><button class="tiny" title="Delete" onclick="deleteEntry('${e.id}')">×</button></div></div>`}).join('');
+}
+function renderCategories(entries){
+ const expenses=entries.filter(e=>e.type==='expense');const sumsBy={};expenses.forEach(e=>sumsBy[e.category]=(sumsBy[e.category]||0)+Number(e.amount));
+ const list=Object.entries(sumsBy).sort((a,b)=>b[1]-a[1]);const total=expenses.reduce((s,e)=>s+Number(e.amount),0);
+ if(!list.length){$('categoryList').innerHTML='<div class="empty"><span>🍓</span>Your category breakdown will bloom here once you add expenses.</div>';return}
+ $('categoryList').innerHTML=list.map(([name,val])=>{const cat=categories.expense.find(c=>c[0]===name);const pct=total?val/total*100:0;return `<div class="cat-row"><div class="cat-icon">${cat?cat[1]:'✨'}</div><div><div class="cat-name">${esc(name)} <span class="muted">· ${Math.round(pct)}%</span></div><div class="cat-track"><div style="width:${pct}%"></div></div></div><div class="cat-amount">${money(val)}</div></div>`}).join('');
+}
+function renderInsights(entries,p,total){
+ const ex=entries.filter(e=>e.type==='expense'), spent=total.expense, budget=Number(p.budget||0);
+ const by={};ex.forEach(e=>by[e.category]=(by[e.category]||0)+Number(e.amount));
+ const top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
+ const tips=[];
+ if(!ex.length)tips.push(['🌱 Start gently','Record expenses for a few days. A clear picture is more useful than guessing.']);
+ if(budget>0){const pct=spent/budget*100;if(pct>=100)tips.push(['🧭 Budget check','You have crossed your planned limit. Review flexible purchases and adjust next month’s plan to something realistic.']);else if(pct>=80)tips.push(['👀 Nearly there',`You’ve used ${Math.round(pct)}% of your budget. Pause before optional purchases until you check what remains.`]);else tips.push(['🌷 Nice progress',`You have ${money(budget-spent)} of your planned budget left. Keep a little buffer for unexpected essentials.`])}
+ if(top)tips.push(['🔎 Biggest category',`${top[0]} is your highest recorded expense category at ${money(top[1])}. If some purchases were optional, consider setting a gentle limit next month.`]);
+ const prev=monthString(new Date(new Date(activeMonth()+'-01T12:00:00').getFullYear(),new Date(activeMonth()+'-01T12:00:00').getMonth()-1,1));
+ const prevE=db.entries.filter(e=>e.date.startsWith(prev)&&e.type==='expense').reduce((s,e)=>s+Number(e.amount),0);
+ if(prevE>0&&spent>prevE)tips.push(['📈 Compared with last month',`Recorded spending is ${money(spent-prevE)} higher than last month. Check which categories changed before deciding what to cut.`]);
+ else if(prevE>0&&spent<prevE)tips.push(['🌟 Spending trend',`Recorded spending is ${money(prevE-spent)} lower than last month. Notice which choices helped, while keeping essentials covered.`]);
+ if(!tips.length)tips.push(['💗 Small steps matter','Add your monthly budget and record entries to unlock more tailored suggestions.']);
+ $('insights').innerHTML=tips.slice(0,4).map(t=>`<div class="tip"><strong>${t[0]}</strong>${esc(t[1])}</div>`).join('');
+}
+function previousMonthOf(month){const d=new Date(month+'-01T12:00:00');return monthString(new Date(d.getFullYear(),d.getMonth()-1,1))}
+function monthLabel(month){return new Date(month+'-01T12:00:00').toLocaleDateString('en-IN',{month:'short',year:'numeric'})}
+function comparisonData(month){
+ const entries=db.entries.filter(e=>e.date&&e.date.startsWith(month)&&e.type==='expense');
+ const by={};let spent=0;entries.forEach(e=>{const n=Number(e.amount)||0;spent+=n;by[e.category]=(by[e.category]||0)+n});
+ const p=db.plans[month]||{budget:0,income:0,goal:0};
+ const income=Number(p.income)||0,budget=Number(p.budget)||0;
+ const basis=income>0?'pocket money':budget>0?'budget proxy':'none';
+ const available=income>0?income:budget;
+ return {entries,by,spent,available,savings:available-spent,hasPlan:basis!=='none',basis,days:monthDays(month)}
+}
+function monthDays(month){const d=new Date(month+'-01T12:00:00');return new Date(d.getFullYear(),d.getMonth()+1,0).getDate()}
+function renderComparison(){
+ const current=activeMonth(),prev=previousMonthOf(current),a=comparisonData(prev),b=comparisonData(current);
+ $('comparisonLabel').textContent=`${monthLabel(prev)} vs ${monthLabel(current)}`;$('prevMonthLabel').textContent=monthLabel(prev);$('currentMonthLabel').textContent=monthLabel(current);$('prevSpent').textContent=money(a.spent);$('currentComparedSpent').textContent=money(b.spent);
+ const delta=b.spent-a.spent, pct=a.spent>0?(delta/a.spent*100):null;
+ $('spendingChange').textContent=(delta>0?'+':delta<0?'−':'')+money(Math.abs(delta));
+ $('spendingChangeHint').textContent=delta>0?`Spent ${money(delta)} more${pct!==null?` (+${Math.round(pct)}%)`:''} this month`:delta<0?`Spent ${money(-delta)} less${pct!==null?` (${Math.round(pct)}%)`:''} this month`:a.spent===0&&b.spent===0?'No expenses recorded in either month':'Same recorded spending';
+ const winner=$('savingsWinner'),hint=$('savingsCompareHint');
+ if(!a.hasPlan&&!b.hasPlan){winner.textContent='Need data';hint.textContent='Add a plan for both months'}
+ else if(!a.hasPlan||!b.hasPlan){winner.textContent='Partial data';hint.textContent='Add pocket money plans for both months'}
+ else if(a.basis!==b.basis){winner.textContent='Use same basis';hint.textContent=`${monthLabel(prev)}: ${a.basis}; ${monthLabel(current)}: ${b.basis}. Add pocket money for both.`}
+ else if(Math.abs(a.savings-b.savings)<0.005){winner.textContent='Tie';hint.textContent=`Both estimated balances: ${money(a.savings)} (${a.basis})`}
+ else if(a.savings>b.savings){winner.textContent=monthLabel(prev);hint.textContent=`Balance ${money(a.savings)} vs ${money(b.savings)} (${a.basis})`}
+ else{winner.textContent=monthLabel(current);hint.textContent=`Balance ${money(b.savings)} vs ${money(a.savings)} (${b.basis})`}
+ const cats=[...new Set([...Object.keys(a.by),...Object.keys(b.by)])].map(name=>({name,old:a.by[name]||0,cur:b.by[name]||0,delta:(b.by[name]||0)-(a.by[name]||0)})).sort((x,y)=>Math.abs(y.delta)-Math.abs(x.delta));
+ $('categoryComparison').innerHTML=cats.length?cats.map(c=>{const change=c.old>0?` · ${c.delta>0?'+':''}${Math.round(c.delta/c.old*100)}%`:c.cur>0?' · new this month':'';return `<div class="compare-row"><span>${esc(c.name)}<br><small class="muted">${money(c.old)} → ${money(c.cur)}${change}</small></span><strong style="color:${c.delta>0?'#c64c70':c.delta<0?'#218b67':'var(--ink)'}">${c.delta>0?'+':c.delta<0?'−':''}${money(Math.abs(c.delta))}</strong></div>`}).join(''):'<div class="empty"><span>🌱</span>Add expenses in either month to compare categories.</div>';
+ const tips=[];
+ if(!a.entries.length&&!b.entries.length)tips.push(['🌱 Start tracking','Add expenses to one or both months. This comparison updates automatically.']);
+ else{
+  tips.push(delta>0?['🔎 Spending rose',`Recorded spending increased by ${money(delta)}.`]:delta<0?['🌷 Spending fell',`Recorded spending decreased by ${money(-delta)}. Check whether this reflects spending changes or fewer recorded expenses.`]:['⚖️ Spending stayed level','Both months show the same recorded spending.']);
+  const rise=cats.filter(c=>c.delta>0).sort((x,y)=>y.delta-x.delta)[0],fall=cats.filter(c=>c.delta<0).sort((x,y)=>x.delta-y.delta)[0];
+  if(rise)tips.push(['📈 Biggest increase',`${rise.name} rose by ${money(rise.delta)}.`]);if(fall)tips.push(['📉 Biggest decrease',`${fall.name} fell by ${money(-fall.delta)}.`]);
+  if(a.hasPlan&&b.hasPlan&&a.basis===b.basis){const sd=b.savings-a.savings;tips.push([sd>0?'🐷 Balance improved':sd<0?'🧭 Balance reduced':'💗 Balance unchanged',sd>0?`Estimated money left increased by ${money(sd)}.`:sd<0?`Estimated money left decreased by ${money(-sd)}.`:'Estimated money left is equal in both months.'])}
+  else tips.push(['💰 Compare savings fairly','Enter pocket money / available money for both months. Budget limits alone are only a proxy for money available.'])
+ }
+ $('comparisonInsights').innerHTML=tips.map(t=>`<div class="tip"><strong>${t[0]}</strong>${esc(t[1])}</div>`).join('');
+ renderForecast(b,current);
+}
+function renderForecast(data,month){
+ const now=new Date(),nowMonth=monthString(now),selectedDate=new Date(month+'-01T12:00:00'),isCurrent=month===nowMonth,isFuture=month>nowMonth;
+ const days=monthDays(month),elapsed=isCurrent?now.getDate():isFuture?0:days;
+ const actual=data.spent,estimate=isCurrent&&elapsed>0?actual/elapsed*days:actual;
+ $('forecastLabel').textContent=isCurrent?'Live estimate for this month':isFuture?'Future month':'Completed month';
+ $('forecastDays').textContent=elapsed?`${elapsed} / ${days}`:'—';$('forecastDaysHint').textContent=isCurrent?'Days elapsed / days in month':isFuture?'Month has not started':'Full month included';
+ $('forecastTotal').textContent=money(estimate);$('forecastDailyAvg').textContent=elapsed?money(actual/elapsed):money(0);
+ $('forecastMethod').textContent=isCurrent?'Current daily average × month length':isFuture?'No data yet':'Actual recorded total';
+ const budget=Number((db.plans[month]||{}).budget)||0,bdiff=estimate-budget;
+ $('forecastBudgetDiff').textContent=budget?((bdiff>0?'+':'−')+money(Math.abs(bdiff))):'—';
+ $('forecastBudgetHint').textContent=budget?(bdiff>0?'Projected over budget':bdiff<0?'Projected under budget':'On budget'):'Set a monthly spending limit';
+ const ratio=budget?estimate/budget*100:0;$('forecastBar').style.width=(budget?Math.min(100,Math.max(0,ratio)):0)+'%';$('forecastBar').style.background=budget&&ratio>100?'#e97891':'linear-gradient(90deg,#ff9db8,#bba8ff,#87ddba)';
+ $('forecastProgressText').textContent=budget?`${money(estimate)} estimated of ${money(budget)} budget`:`Recorded so far: ${money(actual)}`;$('forecastPercent').textContent=budget?`${Math.round(ratio)}%`:'No budget set';
+ $('forecastNote').textContent=isFuture?'This month is in the future, so the forecast uses no spending data yet.':isCurrent?`Projection assumes the current daily average (${money(elapsed?actual/elapsed:0)}/day) continues for the remaining ${Math.max(0,days-elapsed)} days. Missing entries can make the estimate too low.`:'This month has ended, so the figure is the recorded total rather than a future projection. Make sure all expenses are entered.';
+}
+function renderSummary(entries,p,total){
+ const d=new Date(activeMonth()+'-01T12:00:00');$('summaryMonth').textContent=d.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+ const ex=entries.filter(e=>e.type==='expense'), by={};ex.forEach(e=>by[e.category]=(by[e.category]||0)+Number(e.amount));
+ const top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];
+ const available=Number(p.income||0);const lines=[['Pocket money / money available',money(available)],['Total expenses',money(total.expense)],['Estimated money left',money((available>0?available:Number(p.budget||0))-total.expense)],['Monthly spending limit',money(p.budget)],['Budget remaining',money(Number(p.budget||0)-total.expense)],['Savings goal',money(p.goal)],['Expenses recorded',String(entries.length)],['Highest expense category',top?`${top[0]} — ${money(top[1])}`:'Not enough data']];
+ $('monthSummary').innerHTML=lines.map(([a,b])=>`<div class="compare-row"><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join('');
+}
+function renderNextTips(entries,p,total){
+ const ex=entries.filter(e=>e.type==='expense'),by={};ex.forEach(e=>by[e.category]=(by[e.category]||0)+Number(e.amount));
+ const sorted=Object.entries(by).sort((a,b)=>b[1]-a[1]);const tips=[];
+ if(!ex.length)tips.push(['📝 First, gather a little data','Record your daily spending this month so next month’s plan reflects real life.']);
+ if(sorted[0])tips.push(['🍜 Review your top category',`Plan a comfortable limit for ${sorted[0][0]} (currently ${money(sorted[0][1])}). Choose a realistic amount rather than cutting essentials.`]);
+ if(sorted.some(([c])=>c==='Subscriptions'))tips.push(['🎧 Subscription check','Review subscriptions you no longer use and cancel only the ones you do not need.']);
+ if(sorted.some(([c])=>c==='Canteen & snacks'))tips.push(['🥪 Food without waste','Try planning a few meals or carrying a snack when practical; keep room for social meals you value.']);
+ if(Number(p.goal)>0){const gap=Number(p.goal)-((Number(p.income)>0?Number(p.income):Number(p.budget||0))-total.expense);tips.push([gap>0?'🐷 Make the goal manageable':'🎉 You reached your goal!',gap>0?`Your current recorded balance is ${money((Number(p.income)>0?Number(p.income):Number(p.budget||0))-total.expense)}. To aim for ${money(p.goal)}, consider a realistic weekly saving target of about ${money(Math.max(0,gap)/4)} next month.`:'Your estimated money left meets your savings goal. Keep a little buffer for unexpected college expenses too.'])}
+ if(sorted.length>1)tips.push(['🛍️ Try a 24-hour pause','For non-urgent shopping, wait a day before buying and check whether it fits your plan.']);
+ if(!tips.length)tips.push(['🌱 Set one tiny goal','Pick one flexible category to review, and move a manageable amount into savings when you receive income.']);
+ $('nextTips').innerHTML=tips.slice(0,4).map(t=>`<div class="tip"><strong>${t[0]}</strong>${esc(t[1])}</div>`).join('');
+}
+
+$('monthPicker').value=monthString(now);$('entryDate').value=dateToday();setCategories();
+$('entryForm').addEventListener('submit',ev=>{
+ ev.preventDefault();const amount=Number($('amount').value);if(!(amount>0)){toast('Please enter an amount greater than zero.');return}
+ const entry={id:editingId||`${Date.now()}_${Math.random().toString(36).slice(2,8)}`,type:'expense',amount,category:$('category').value,date:$('entryDate').value,payment:$('payment').value,description:$('description').value.trim(),createdAt:Date.now()};
+ if(editingId){const i=db.entries.findIndex(e=>e.id===editingId);if(i>=0)db.entries[i]=entry;toast('Entry updated 🌷')}else{db.entries.push(entry);toast('Saved to your diary 💗')}
+ persist();resetForm();render();
+});
+function resetForm(){$('entryForm').reset();$('entryDate').value=dateToday();editingId=null;$('formTitle').textContent='🧁 Add an expense';$('submitEntry').textContent='Add expense 💗';$('cancelEdit').hidden=true;setCategories()}
+window.editEntry=id=>{const e=db.entries.find(x=>x.id===id);if(!e)return;editingId=id;setCategories(e.category);$('amount').value=e.amount;$('entryDate').value=e.date;$('payment').value=e.payment||'UPI';$('description').value=e.description||'';$('formTitle').textContent='✏️ Edit diary entry';$('submitEntry').textContent='Update entry 🌷';$('cancelEdit').hidden=false;$('entryForm').scrollIntoView({behavior:'smooth',block:'start'})};
+window.deleteEntry=id=>{if(!confirm('Delete this diary entry? This cannot be undone.'))return;db.entries=db.entries.filter(e=>e.id!==id);persist();if(editingId===id)resetForm();render();toast('Entry deleted')};
+$('cancelEdit').addEventListener('click',resetForm);
+$('savePlan').addEventListener('click',()=>{const budget=Math.max(0,Number($('budgetInput').value)||0),income=Math.max(0,Number($('incomePlan').value)||0),goal=Math.max(0,Number($('savingsGoal').value)||0);db.plans[activeMonth()]={budget,income,goal};persist();render();toast('Your student budget is saved 🌼')});
+$('typeFilter').addEventListener('change',render);
+$('monthPicker').addEventListener('change',()=>{resetForm();render()});
+function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+function exportCSV(entries=monthEntries(),filename='pennybloom-month.csv'){
+ const rows=[['Date','Type','Category','Description','Payment method','Amount (INR)'],...entries.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(e=>[e.date,e.type,e.category,e.description,e.payment,e.amount])];
+ const csv='\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('CSV export prepared ⬇');
+}
+$('exportBtn').addEventListener('click',()=>exportCSV(db.entries,'pennybloom-all-entries.csv'));
+$('summaryExport').addEventListener('click',()=>exportCSV(monthEntries(),`pennybloom-${activeMonth()}.csv`));
+$('backupBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`pennybloom-backup-${dateToday()}.json`;a.click();URL.revokeObjectURL(url);toast('Backup downloaded ♡')});
+load();render();
+})();
+</script>
+</body>
+</html>
